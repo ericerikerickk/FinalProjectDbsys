@@ -17,7 +17,7 @@ namespace University_Grade_Calculator
         {
             InitializeComponent();
         }
-        SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=FinalProject;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
@@ -76,6 +76,11 @@ namespace University_Grade_Calculator
         private void RegistrationForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void RegistrationForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

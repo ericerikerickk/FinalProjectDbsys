@@ -19,7 +19,7 @@ namespace University_Grade_Calculator
             InitializeComponent();
             this.username = username;
         }
-        SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=FinalProject;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (txtPassword.Text.ToString().Trim().ToLower() == txtConPass.Text.ToString().Trim().ToLower())
@@ -40,6 +40,11 @@ namespace University_Grade_Calculator
             {
                 MessageBox.Show("Password and Confirm Password doesn't match!.. Please Check..", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);  //showing the error message if password and confirm password doesn't match  
             }
+        }
+
+        private void ChangePasswordForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
