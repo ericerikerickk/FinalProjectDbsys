@@ -108,5 +108,17 @@ namespace University_Grade_Calculator
             lb_total.Text = "";
            
         }
+
+        private void HomePage_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        // Add logout
+        // Add edit student
+        // Add add student
+        // Add add scores
+        // Add edit scores
+        // Add save changes for both score and student info editing
     }
 }
