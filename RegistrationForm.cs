@@ -30,7 +30,7 @@ namespace University_Grade_Calculator
             {
                 if (txtPassword.Text.ToString().Trim().ToLower() == txtConfirmPassword.Text.ToString().Trim().ToLower()) //validating Password textbox and confirm password textbox is match or unmatch    
                 {
-                    SqlCommand cmd = new SqlCommand("select * from [user] where username='" + txtUserName.Text + "'", con);
+                    SqlCommand cmd = new SqlCommand("select * from [teacher] where username='" + txtUserName.Text + "'", con);
                     SqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
@@ -44,7 +44,7 @@ namespace University_Grade_Calculator
                         string Password = Cryptography.Encrypt(txtPassword.Text.ToString());   // Passing the Password to Encrypt method and the method will return encrypted string and stored in Password variable.  
                         con.Close();
                         con.Open();
-                        SqlCommand insert = new SqlCommand("insert into [user](UserName,Password)values('" + UserName + "','" + Password + "')", con);
+                        SqlCommand insert = new SqlCommand("insert into [teacher](username,password)values('" + UserName + "','" + Password + "')", con);
                         insert.ExecuteNonQuery();
                         con.Close();
                         MessageBox.Show("Record inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
