@@ -17,14 +17,14 @@ namespace University_Grade_Calculator
         {
             InitializeComponent();
         }
-        SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=FinalProject;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
         private void btnProceed_Click(object sender, EventArgs e)
         {
             string Password = "";
             bool IsExist = false;
             con.Open();
-            SqlCommand cmd = new SqlCommand("select * from [user] where username='" + txtUserName.Text + "'", con);
+            SqlCommand cmd = new SqlCommand("select * from [teacher] where username='" + txtUserName.Text + "'", con);
             SqlDataReader sdr = cmd.ExecuteReader();
             if (sdr.Read())
             {
@@ -50,6 +50,11 @@ namespace University_Grade_Calculator
             {
                 MessageBox.Show("Please enter the valid credentials", "error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void ForgotPasswordForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

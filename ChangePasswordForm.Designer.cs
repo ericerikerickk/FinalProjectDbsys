@@ -92,6 +92,7 @@ namespace University_Grade_Calculator
             this.Controls.Add(this.label1);
             this.Name = "ChangePasswordForm";
             this.Text = "ChangePasswordForm";
+            this.Load += new System.EventHandler(this.ChangePasswordForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
