@@ -24,7 +24,7 @@ namespace University_Grade_Calculator
             string Password = "";
             bool IsExist = false;
             con.Open();
-            SqlCommand cmd = new SqlCommand("select * from [user] where username='" + txtUserName.Text + "'", con);
+            SqlCommand cmd = new SqlCommand("select * from [teacher] where username='" + txtUserName.Text + "'", con);
             SqlDataReader sdr = cmd.ExecuteReader();
             if (sdr.Read())
             {

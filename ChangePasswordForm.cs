@@ -28,7 +28,7 @@ namespace University_Grade_Calculator
                 string Password = Cryptography.Encrypt(txtPassword.Text.ToString());   // Passing the Password to Encrypt method and the method will return encrypted string and stored in Password variable.  
                 con.Close();
                 con.Open();
-                SqlCommand insert = new SqlCommand("Update [teachers] set password='" + Password + "' where username= '" + UserName + "'", con);
+                SqlCommand insert = new SqlCommand("Update [teacher] set password='" + Password + "' where username= '" + UserName + "'", con);
                 insert.ExecuteNonQuery();
                 con.Close();
                 MessageBox.Show("Record updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
