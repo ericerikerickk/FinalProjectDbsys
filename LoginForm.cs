@@ -26,13 +26,8 @@ namespace University_Grade_Calculator
             bool IsExist = false;
 
             con.Open();
-            
-            /*
-                TODO: 
-                Check for existing entries in the teacher table
-             */
 
-            SqlCommand cmd = new SqlCommand("SELECT * from [user] where username='" + txtUserName.Text + "'", con);
+            SqlCommand cmd = new SqlCommand("SELECT * from [teacher] where username='" + txtUserName.Text + "'", con);
             SqlDataReader sdr = cmd.ExecuteReader();
 
             if (sdr.Read())
