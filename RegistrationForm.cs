@@ -22,6 +22,10 @@ namespace University_Grade_Calculator
         private void btnRegister_Click(object sender, EventArgs e)
         {
             con.Open();
+
+            // TODO: 
+            // Update fields in the teachers table
+
             if (txtUserName.Text != "" && txtPassword.Text != "" && txtConfirmPassword.Text != "")  //validating the fields whether the fields or empty or not  
             {
                 if (txtPassword.Text.ToString().Trim().ToLower() == txtConfirmPassword.Text.ToString().Trim().ToLower()) //validating Password textbox and confirm password textbox is match or unmatch    
