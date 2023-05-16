@@ -34,6 +34,7 @@ namespace University_Grade_Calculator
                 MessageBox.Show("Record updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
                 LoginForm login = new LoginForm();
+                MessageBox.Show("You will be logged out!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 login.ShowDialog();
             }
             else

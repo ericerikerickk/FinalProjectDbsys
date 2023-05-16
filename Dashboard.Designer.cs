@@ -32,8 +32,14 @@
             this.header = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.gridTitle = new System.Windows.Forms.Label();
+            this.editUsername = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.changePass = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.editUsername.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -44,7 +50,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(229, 43);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(536, 350);
+            this.dataGridView1.Size = new System.Drawing.Size(536, 336);
             this.dataGridView1.TabIndex = 0;
             // 
             // header
@@ -66,6 +72,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Edit profile";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // button2
             // 
@@ -77,33 +84,90 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
-            // label2
+            // gridTitle
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(226, 13);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 15);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Student list";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.gridTitle.AutoSize = true;
+            this.gridTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridTitle.Location = new System.Drawing.Point(226, 13);
+            this.gridTitle.Name = "gridTitle";
+            this.gridTitle.Size = new System.Drawing.Size(79, 15);
+            this.gridTitle.TabIndex = 5;
+            this.gridTitle.Text = "Student list";
+            this.gridTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // editUsername
+            // 
+            this.editUsername.AutoSize = true;
+            this.editUsername.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.editUsername.Controls.Add(this.label1);
+            this.editUsername.Controls.Add(this.txtUsername);
+            this.editUsername.Controls.Add(this.btnSave);
+            this.editUsername.Controls.Add(this.changePass);
+            this.editUsername.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.editUsername.Location = new System.Drawing.Point(229, 40);
+            this.editUsername.Name = "editUsername";
+            this.editUsername.Size = new System.Drawing.Size(170, 123);
+            this.editUsername.TabIndex = 6;
+            this.editUsername.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 15);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Username";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.Location = new System.Drawing.Point(3, 18);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(161, 20);
+            this.txtUsername.TabIndex = 8;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(3, 44);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(164, 43);
+            this.btnSave.TabIndex = 9;
+            this.btnSave.Text = "Save changes";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            // 
+            // changePass
+            // 
+            this.changePass.AutoSize = true;
+            this.changePass.Location = new System.Drawing.Point(3, 110);
+            this.changePass.Margin = new System.Windows.Forms.Padding(3, 20, 3, 0);
+            this.changePass.Name = "changePass";
+            this.changePass.Size = new System.Drawing.Size(92, 13);
+            this.changePass.TabIndex = 10;
+            this.changePass.TabStop = true;
+            this.changePass.Text = "Change password";
+            this.changePass.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ChangePass_LinkClicked);
             // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 391);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.gridTitle);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.header);
+            this.Controls.Add(this.editUsername);
             this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dashboard";
-            this.Load += new System.EventHandler(this.Dashboard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.editUsername.ResumeLayout(false);
+            this.editUsername.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,6 +179,11 @@
         private System.Windows.Forms.Label header;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label gridTitle;
+        private System.Windows.Forms.FlowLayoutPanel editUsername;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.LinkLabel changePass;
     }
 }
