@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using University_Grade_Calculator;
+using Student_Grading_System;
 
 namespace University_Grade_Calculator
 {
@@ -42,9 +43,10 @@ namespace University_Grade_Calculator
             {
                 if (Cryptography.Decrypt(Password).Equals(txtPassword.Text))
                 {
-                        HomePage homepage = new HomePage(txtUserName.Text);
-                        this.Hide();
-                        homepage.ShowDialog();
+                    // HomePage homepage = new HomePage(txtUserName.Text);
+                    Dashboard dashboard = new Dashboard(txtUserName.Text);
+                    this.Hide();
+                    dashboard.Show();
                 }
 
                 else
