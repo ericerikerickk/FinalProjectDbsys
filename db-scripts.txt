@@ -1,0 +1,46 @@
+﻿## ATTENDANCE TABLE
+
+CREATE TABLE [dbo].[attendance] (
+    [Id]         INT NOT NULL,
+    [student_id] INT NOT NULL,
+    [prelim]     INT NULL,
+    [midterm]    INT DEFAULT ((0)) NULL,
+    [final]      INT DEFAULT ((0)) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    FOREIGN KEY ([Id]) REFERENCES [dbo].[student] ([Id])
+);
+
+
+
+## MARKS TABLE
+
+CREATE TABLE [dbo].[marks] (
+    [Id]          INT NOT NULL IDENTITY,
+    [student_id]  INT NOT NULL,
+    [quiz_number] INT NOT NULL,
+    [score]       INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    FOREIGN KEY ([Id]) REFERENCES [dbo].[student] ([Id])
+);
+
+
+
+## STUDENT TABLE
+
+CREATE TABLE [dbo].[student] (
+    [Id]       INT          NOT NULL IDENTITY,
+    [name]     VARCHAR (20) NOT NULL,
+    [semester] VARCHAR (20) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+
+## TEACHERS TABLE
+
+CREATE TABLE [dbo].[Teacher] (
+    [Id]       INT           IDENTITY (1, 1) NOT NULL,
+    [username] VARCHAR (15)  NOT NULL,
+    [password] VARCHAR (150) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
