@@ -19,6 +19,7 @@ namespace Student_Grading_System
         public Dashboard()
         {
             InitializeComponent();
+
         }
 
         public Dashboard(string username)
@@ -73,6 +74,34 @@ namespace Student_Grading_System
         {
             ChangePasswordForm changePass = new ChangePasswordForm(username);
             changePass.ShowDialog();
+        }
+
+        private void Dashboard_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+                {
+                    // Retrieve only the available books
+                    string command = "SELECT * FROM student";
+                    con.Open();
+
+                    SqlCommand cmd = new SqlCommand(command, con);
+                    cmd.ExecuteNonQuery();
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        DataTable books = new DataTable();
+                        adapter.Fill(books);
+                        dataGridView1.DataSource = books;
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err + "We can't load data from our server.");
+            }
+
         }
     }
 }
