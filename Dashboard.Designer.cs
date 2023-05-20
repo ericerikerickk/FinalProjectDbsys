@@ -38,6 +38,7 @@
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.changePass = new System.Windows.Forms.LinkLabel();
+            this.btnAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.editUsername.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +53,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(536, 336);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick);
             // 
             // header
             // 
@@ -76,7 +78,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(28, 135);
+            this.button2.Location = new System.Drawing.Point(28, 311);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(164, 43);
             this.button2.TabIndex = 3;
@@ -150,17 +152,27 @@
             this.changePass.Text = "Change password";
             this.changePass.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ChangePass_LinkClicked);
             // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(28, 138);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(164, 43);
+            this.btnAdd.TabIndex = 7;
+            this.btnAdd.Text = "Add students";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 391);
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.gridTitle);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.header);
             this.Controls.Add(this.editUsername);
-            this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -186,5 +198,6 @@
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.LinkLabel changePass;
+        private System.Windows.Forms.Button btnAdd;
     }
 }

@@ -103,5 +103,10 @@ namespace Student_Grading_System
             }
 
         }
+
+        private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
