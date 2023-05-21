@@ -68,6 +68,9 @@
             this.lb_Grade = new System.Windows.Forms.Label();
             this.lb_displayresult = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.btnAttendance = new System.Windows.Forms.Button();
+            this.btnMarks = new System.Windows.Forms.Button();
+            this.btnCalculate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -146,7 +149,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(145, 44);
             this.button1.TabIndex = 7;
-            this.button1.Text = "Calculate Grade";
+            this.button1.Text = "Edit student";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -164,7 +167,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 232);
+            this.label4.Location = new System.Drawing.Point(10, 274);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(96, 26);
@@ -174,7 +177,7 @@
             // mid
             // 
             this.mid.AutoSize = true;
-            this.mid.Location = new System.Drawing.Point(10, 283);
+            this.mid.Location = new System.Drawing.Point(10, 325);
             this.mid.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.mid.Name = "mid";
             this.mid.Size = new System.Drawing.Size(77, 13);
@@ -184,7 +187,7 @@
             // final
             // 
             this.final.AutoSize = true;
-            this.final.Location = new System.Drawing.Point(10, 329);
+            this.final.Location = new System.Drawing.Point(10, 371);
             this.final.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.final.Name = "final";
             this.final.Size = new System.Drawing.Size(88, 13);
@@ -193,32 +196,35 @@
             // 
             // tb_attendance
             // 
-            this.tb_attendance.Location = new System.Drawing.Point(116, 232);
+            this.tb_attendance.Location = new System.Drawing.Point(116, 274);
             this.tb_attendance.Margin = new System.Windows.Forms.Padding(2);
             this.tb_attendance.Name = "tb_attendance";
             this.tb_attendance.Size = new System.Drawing.Size(76, 20);
             this.tb_attendance.TabIndex = 13;
+            this.tb_attendance.Text = "0";
             // 
             // tb_Mid
             // 
-            this.tb_Mid.Location = new System.Drawing.Point(116, 280);
+            this.tb_Mid.Location = new System.Drawing.Point(116, 322);
             this.tb_Mid.Margin = new System.Windows.Forms.Padding(2);
             this.tb_Mid.Name = "tb_Mid";
             this.tb_Mid.Size = new System.Drawing.Size(76, 20);
             this.tb_Mid.TabIndex = 14;
+            this.tb_Mid.Text = "0";
             // 
             // tb_Final
             // 
-            this.tb_Final.Location = new System.Drawing.Point(116, 329);
+            this.tb_Final.Location = new System.Drawing.Point(116, 371);
             this.tb_Final.Margin = new System.Windows.Forms.Padding(2);
             this.tb_Final.Name = "tb_Final";
             this.tb_Final.Size = new System.Drawing.Size(76, 20);
             this.tb_Final.TabIndex = 15;
+            this.tb_Final.Text = "0";
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pictureBox1.Location = new System.Drawing.Point(441, 11);
+            this.pictureBox1.Location = new System.Drawing.Point(441, 22);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(4, 380);
@@ -228,7 +234,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(236, 235);
+            this.label5.Location = new System.Drawing.Point(236, 277);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(87, 13);
@@ -238,7 +244,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(236, 275);
+            this.label6.Location = new System.Drawing.Point(236, 317);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(90, 13);
@@ -248,7 +254,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(236, 314);
+            this.label7.Location = new System.Drawing.Point(236, 356);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(93, 13);
@@ -258,7 +264,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(236, 354);
+            this.label8.Location = new System.Drawing.Point(236, 396);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(94, 13);
@@ -267,7 +273,7 @@
             // 
             // tb_quiz1
             // 
-            this.tb_quiz1.Location = new System.Drawing.Point(330, 232);
+            this.tb_quiz1.Location = new System.Drawing.Point(330, 274);
             this.tb_quiz1.Margin = new System.Windows.Forms.Padding(2);
             this.tb_quiz1.Name = "tb_quiz1";
             this.tb_quiz1.Size = new System.Drawing.Size(76, 20);
@@ -275,7 +281,7 @@
             // 
             // tb_quiz2
             // 
-            this.tb_quiz2.Location = new System.Drawing.Point(330, 273);
+            this.tb_quiz2.Location = new System.Drawing.Point(330, 315);
             this.tb_quiz2.Margin = new System.Windows.Forms.Padding(2);
             this.tb_quiz2.Name = "tb_quiz2";
             this.tb_quiz2.Size = new System.Drawing.Size(76, 20);
@@ -283,7 +289,7 @@
             // 
             // tb_quiz3
             // 
-            this.tb_quiz3.Location = new System.Drawing.Point(330, 311);
+            this.tb_quiz3.Location = new System.Drawing.Point(330, 353);
             this.tb_quiz3.Margin = new System.Windows.Forms.Padding(2);
             this.tb_quiz3.Name = "tb_quiz3";
             this.tb_quiz3.Size = new System.Drawing.Size(76, 20);
@@ -291,7 +297,7 @@
             // 
             // tb_quiz4
             // 
-            this.tb_quiz4.Location = new System.Drawing.Point(330, 349);
+            this.tb_quiz4.Location = new System.Drawing.Point(330, 391);
             this.tb_quiz4.Margin = new System.Windows.Forms.Padding(2);
             this.tb_quiz4.Name = "tb_quiz4";
             this.tb_quiz4.Size = new System.Drawing.Size(76, 20);
@@ -452,34 +458,76 @@
             // 
             // lb_displayresult
             // 
-            this.lb_displayresult.AutoSize = true;
-            this.lb_displayresult.Font = new System.Drawing.Font("Palatino Linotype", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_displayresult.Location = new System.Drawing.Point(478, 304);
+            this.lb_displayresult.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lb_displayresult.Location = new System.Drawing.Point(478, 289);
             this.lb_displayresult.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_displayresult.Name = "lb_displayresult";
-            this.lb_displayresult.Size = new System.Drawing.Size(43, 16);
+            this.lb_displayresult.Size = new System.Drawing.Size(265, 67);
             this.lb_displayresult.TabIndex = 39;
             this.lb_displayresult.Text = "label16";
+            this.lb_displayresult.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lb_displayresult.Visible = false;
             // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Red;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(308, 99);
+            this.button2.Location = new System.Drawing.Point(260, 99);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(98, 33);
+            this.button2.Size = new System.Drawing.Size(146, 33);
             this.button2.TabIndex = 40;
-            this.button2.Text = "Reset";
+            this.button2.Text = "Delete student";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btnAttendance
+            // 
+            this.btnAttendance.BackColor = System.Drawing.Color.Lime;
+            this.btnAttendance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAttendance.Location = new System.Drawing.Point(13, 221);
+            this.btnAttendance.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAttendance.Name = "btnAttendance";
+            this.btnAttendance.Size = new System.Drawing.Size(157, 31);
+            this.btnAttendance.TabIndex = 41;
+            this.btnAttendance.Text = "Update attendance";
+            this.btnAttendance.UseVisualStyleBackColor = false;
+            this.btnAttendance.Click += new System.EventHandler(this.BtnAttendance_Click);
+            // 
+            // btnMarks
+            // 
+            this.btnMarks.BackColor = System.Drawing.Color.Lime;
+            this.btnMarks.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMarks.Location = new System.Drawing.Point(248, 221);
+            this.btnMarks.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMarks.Name = "btnMarks";
+            this.btnMarks.Size = new System.Drawing.Size(157, 31);
+            this.btnMarks.TabIndex = 42;
+            this.btnMarks.Text = "Update marks";
+            this.btnMarks.UseVisualStyleBackColor = false;
+            this.btnMarks.Click += new System.EventHandler(this.BtnMarks_Click);
+            // 
+            // btnCalculate
+            // 
+            this.btnCalculate.BackColor = System.Drawing.Color.Lime;
+            this.btnCalculate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalculate.Location = new System.Drawing.Point(452, 380);
+            this.btnCalculate.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCalculate.Name = "btnCalculate";
+            this.btnCalculate.Size = new System.Drawing.Size(291, 44);
+            this.btnCalculate.TabIndex = 43;
+            this.btnCalculate.Text = "Calculate grade";
+            this.btnCalculate.UseVisualStyleBackColor = false;
+            this.btnCalculate.Click += new System.EventHandler(this.BtnCalculate_Click);
             // 
             // HomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 391);
+            this.ClientSize = new System.Drawing.Size(765, 429);
+            this.Controls.Add(this.btnCalculate);
+            this.Controls.Add(this.btnMarks);
+            this.Controls.Add(this.btnAttendance);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.lb_displayresult);
             this.Controls.Add(this.lb_Grade);
@@ -574,6 +622,9 @@
         private System.Windows.Forms.Label lb_Grade;
         private System.Windows.Forms.Label lb_displayresult;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnAttendance;
+        private System.Windows.Forms.Button btnMarks;
+        private System.Windows.Forms.Button btnCalculate;
     }
 }
 
