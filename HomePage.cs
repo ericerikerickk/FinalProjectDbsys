@@ -46,76 +46,6 @@ namespace University_Grade_Calculator
            
         }
 
-        public void calculateGrade()
-        {
-            if (tb_attendance.Text == "" || tb_Final.Text == "" || tb_Mid.Text == "" || tb_quiz1.Text == "" || tb_quiz2.Text == "" || tb_quiz3.Text == "" || tb_quiz4.Text == "")
-            {
-                MessageBox.Show("Marking fields should not be left empty.");
-            }
-            else
-            {
-                int inatt, finalatt, mid, final, total, percentage, quizsum = 0;
-                inatt = int.Parse(tb_attendance.Text);
-                finalatt = (inatt * 30) / 28;
-                lb_attendance.Text = finalatt.ToString() + "/30";
-                lb_attendance.Visible = true;
-                mid = int.Parse(tb_Mid.Text);
-                lb_mid.Text = mid.ToString() + "/75";
-                lb_mid.Visible = true;
-                final = int.Parse(tb_Final.Text);
-                lb_Final.Text = final.ToString() + "/150";
-                lb_Final.Visible = true;
-
-                int quiz1, quiz2, quiz3, quiz4;
-                quiz1 = int.Parse(tb_quiz1.Text);
-                quiz2 = int.Parse(tb_quiz2.Text);
-                quiz3 = int.Parse(tb_quiz3.Text);
-                quiz4 = int.Parse(tb_quiz4.Text);
-                int[] array = { quiz1, quiz2, quiz3, quiz4 };
-
-                for (int i = 0; i <= 2; i++)
-                {
-                    Array.Sort(array);
-                    Array.Reverse(array);
-                    quizsum += array[i];
-                }
-                lb_quiz.Text = quizsum.ToString() + "/45";
-                lb_quiz.Visible = true;
-
-                total = finalatt + mid + quizsum + final;
-                lb_total.Text = total.ToString() + "/300";
-                lb_total.Visible = true;
-                percentage = (total * 100) / 300;
-
-                if (percentage >= 80)
-                    lb_Grade.Text = "A+";
-                else if (percentage >= 75 && percentage <= 79)
-                    lb_Grade.Text = "A";
-                else if (percentage >= 70 && percentage <= 74)
-                    lb_Grade.Text = "A-";
-                else if (percentage >= 65 && percentage <= 69)
-                    lb_Grade.Text = "B+";
-                else if (percentage >= 64 && percentage <= 60)
-                    lb_Grade.Text = "B";
-                else if (percentage >= 55 && percentage <= 59)
-                    lb_Grade.Text = "B-";
-                else if (percentage >= 50 && percentage <= 54)
-                    lb_Grade.Text = "C+";
-                else if (percentage >= 45 && percentage <= 49)
-                    lb_Grade.Text = "C";
-                else if (percentage >= 40 && percentage <= 44)
-                    lb_Grade.Text = "D";
-                else
-                    lb_Grade.Text = "F";
-
-                lb_Grade.Visible = true;
-
-
-                lb_displayresult.Text = tb_Name.Text + " with student id " + tb_studentID.Text + " obtained " + percentage.ToString() + "% marks in " + tb_semester.Text + " Semester.";
-                lb_displayresult.Visible = true;
-            }
-        }
-
         private void HomePage_Load(object sender, EventArgs e)
         {
             retrieveStudent();
@@ -270,22 +200,10 @@ namespace University_Grade_Calculator
                 {
                     con.Open();
 
-                    SqlCommand cmd = new SqlCommand("DELETE FROM attendance WHERE student_id='" + this.id + "'", con);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err + "We can't update this student to the database.");
-            }
-
-            try
-            {
-                using (SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
-                {
-                    con.Open();
-
-                    SqlCommand cmd = new SqlCommand("insert into[attendance](student_id, prelim, midterm, final)values('" + id + "', '" + prelim + "', '" + midterm + "', '" + finals + "')", con);
+                    SqlCommand cmd = new SqlCommand("UPDATE attendance SET prelim = @prelim, midterm = @midterm, final = @final", con);
+                    cmd.Parameters.AddWithValue("@prelim", prelim);
+                    cmd.Parameters.AddWithValue("@midterm", midterm);
+                    cmd.Parameters.AddWithValue("@final", finals);
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("Attendance updated!");
@@ -297,9 +215,74 @@ namespace University_Grade_Calculator
             }
         }
 
+        public void calculateGrade()
+        {
+            if (tb_attendance.Text == "" || tb_Final.Text == "" || tb_Mid.Text == "" || tb_quiz1.Text == "" || tb_quiz2.Text == "" || tb_quiz3.Text == "" || tb_quiz4.Text == "")
+            {
+                MessageBox.Show("Marking fields should not be left empty.");
+            }
+            else
+            {
+                int inatt, finalatt, mid, final, total, percentage, quizsum = 0;
+                inatt = int.Parse(tb_attendance.Text);
+                finalatt = (inatt * 30) / 28;
+                lb_attendance.Text = finalatt.ToString() + "/30";
+                lb_attendance.Visible = true;
+                mid = int.Parse(tb_Mid.Text);
+                lb_mid.Text = mid.ToString() + "/75";
+                lb_mid.Visible = true;
+                final = int.Parse(tb_Final.Text);
+                lb_Final.Text = final.ToString() + "/150";
+                lb_Final.Visible = true;
 
-        // Add add scores
-        // Add edit scores
-        // Add save changes for both score and student info editing
+                int quiz1, quiz2, quiz3, quiz4;
+                quiz1 = int.Parse(tb_quiz1.Text);
+                quiz2 = int.Parse(tb_quiz2.Text);
+                quiz3 = int.Parse(tb_quiz3.Text);
+                quiz4 = int.Parse(tb_quiz4.Text);
+                int[] array = { quiz1, quiz2, quiz3, quiz4 };
+
+                for (int i = 0; i <= 2; i++)
+                {
+                    Array.Sort(array);
+                    Array.Reverse(array);
+                    quizsum += array[i];
+                }
+                lb_quiz.Text = quizsum.ToString() + "/45";
+                lb_quiz.Visible = true;
+
+                total = finalatt + mid + quizsum + final;
+                lb_total.Text = total.ToString() + "/300";
+                lb_total.Visible = true;
+                percentage = (total * 100) / 300;
+
+                if (percentage >= 80)
+                    lb_Grade.Text = "A+";
+                else if (percentage >= 75 && percentage <= 79)
+                    lb_Grade.Text = "A";
+                else if (percentage >= 70 && percentage <= 74)
+                    lb_Grade.Text = "A-";
+                else if (percentage >= 65 && percentage <= 69)
+                    lb_Grade.Text = "B+";
+                else if (percentage >= 64 && percentage <= 60)
+                    lb_Grade.Text = "B";
+                else if (percentage >= 55 && percentage <= 59)
+                    lb_Grade.Text = "B-";
+                else if (percentage >= 50 && percentage <= 54)
+                    lb_Grade.Text = "C+";
+                else if (percentage >= 45 && percentage <= 49)
+                    lb_Grade.Text = "C";
+                else if (percentage >= 40 && percentage <= 44)
+                    lb_Grade.Text = "D";
+                else
+                    lb_Grade.Text = "F";
+
+                lb_Grade.Visible = true;
+
+
+                lb_displayresult.Text = tb_Name.Text + " with student id " + tb_studentID.Text + " obtained " + percentage.ToString() + "% marks in " + tb_semester.Text + " Semester.";
+                lb_displayresult.Visible = true;
+            }
+        }
     }
 }
