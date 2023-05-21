@@ -13,6 +13,7 @@ namespace Student_Grading_System
 {
     public partial class AddStudent : Form
     {
+
         public AddStudent()
         {
             InitializeComponent();
@@ -20,17 +21,22 @@ namespace Student_Grading_System
 
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
+            int recentlyInsertedId;
+
             try
             {
                 using (SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
                 {
                     con.Open();
 
-                    SqlCommand cmd = new SqlCommand("insert into[student](name, semester)values('" + txtName.Text.Trim() + "', '" + txtSemester.Text.Trim() + "')", con);
-                    cmd.ExecuteNonQuery();
+                    SqlCommand studentCmd= new SqlCommand("INSERT INTO student(name, semester) VALUES(@name, @semester); SELECT SCOPE_IDENTITY();", con);
+                    studentCmd.Parameters.AddWithValue("@name", txtName.Text.Trim());
+                    studentCmd.Parameters.AddWithValue("@semester", txtSemester.Text.Trim());
 
-                    MessageBox.Show("Student added!");
+                    recentlyInsertedId = Convert.ToInt32(studentCmd.ExecuteScalar());
                 }
+
+                createAttendance(recentlyInsertedId);
             }
             catch (Exception err)
             {
@@ -40,5 +46,25 @@ namespace Student_Grading_System
             this.Close();
         }
 
+        private void createAttendance(int id)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+                {
+                    con.Open();
+
+                    SqlCommand attendanceCmd = new SqlCommand("INSERT INTO attendance(student_id) VALUES(@id)", con);
+                    attendanceCmd.Parameters.AddWithValue("@id", id);
+                    attendanceCmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Student added!");
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err + "We can't add this student to the database.");
+            }
+        }
     }
 }

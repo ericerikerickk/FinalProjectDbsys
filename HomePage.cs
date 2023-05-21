@@ -119,6 +119,34 @@ namespace University_Grade_Calculator
         private void HomePage_Load(object sender, EventArgs e)
         {
             retrieveStudent();
+            retrieveAttendance();
+            retrieveMarks();
+
+        }
+
+        private void BtnAttendance_Click(object sender, EventArgs e)
+        {
+            if (btnAttendance.Text.Trim().Equals("Update attendance"))
+            {
+                btnAttendance.Text = "Save changes";
+                tb_attendance.Enabled = true;
+                tb_Mid.Enabled = true;
+                tb_Final.Enabled = true;
+            }
+
+            else
+            {
+                btnAttendance.Text = "Update attendance";
+                tb_attendance.Enabled = false;
+                tb_Mid.Enabled = false;
+                tb_Final.Enabled = false;
+                updateAttendance(tb_attendance.Text.Trim(), tb_Mid.Text.Trim(), tb_Final.Text.Trim());
+            }
+        }
+
+        private void BtnMarks_Click(object sender, EventArgs e)
+        {
+            
         }
 
         private void deleteStudent()
@@ -129,8 +157,13 @@ namespace University_Grade_Calculator
                 {
                     con.Open();
 
-                    SqlCommand cmd = new SqlCommand("DELETE FROM student WHERE id='" + Int32.Parse(tb_studentID.Text.Trim()) + "'", con);
-                    cmd.ExecuteNonQuery();
+                    SqlCommand studentCmd = new SqlCommand("DELETE FROM student WHERE id='" + Int32.Parse(tb_studentID.Text.Trim()) + "'", con);
+                    SqlCommand attendanceCmd = new SqlCommand("DELETE FROM attendance WHERE student_id = @id",con);
+
+                    attendanceCmd.Parameters.AddWithValue("@id", this.id);
+
+                    attendanceCmd.ExecuteNonQuery();
+                    studentCmd.ExecuteNonQuery();
 
                     MessageBox.Show("Student deleted!");
                 }
@@ -191,8 +224,80 @@ namespace University_Grade_Calculator
             tb_semester.Enabled = false;
         }
 
-        // Add edit student
-        // Add delete student
+        private void retrieveAttendance()
+        {
+            string prelim ="", midterm = "", final = "";
+
+            SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            con.Open();
+
+            using (SqlCommand command = new SqlCommand("SELECT * FROM attendance WHERE student_id = '" + this.id + "'", con))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        prelim = reader.GetInt32(2).ToString();
+                        midterm = reader.GetInt32(3).ToString();
+                        final = reader.GetInt32(4).ToString();
+                    }
+                }
+            }
+
+            con.Close();
+
+            tb_attendance.Text = prelim;
+            tb_Mid.Text = midterm;
+            tb_Final.Text = final;
+
+            tb_attendance.Enabled = false;
+            tb_Mid.Enabled = false;
+            tb_Final.Enabled = false;
+
+        }
+
+        private void retrieveMarks()
+        {
+
+        }
+
+        private void updateAttendance(string prelim, string midterm, string finals)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+                {
+                    con.Open();
+
+                    SqlCommand cmd = new SqlCommand("DELETE FROM attendance WHERE student_id='" + this.id + "'", con);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err + "We can't update this student to the database.");
+            }
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+                {
+                    con.Open();
+
+                    SqlCommand cmd = new SqlCommand("insert into[attendance](student_id, prelim, midterm, final)values('" + id + "', '" + prelim + "', '" + midterm + "', '" + finals + "')", con);
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Attendance updated!");
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err + "We can't add this student to the database.");
+            }
+        }
+
+
         // Add add scores
         // Add edit scores
         // Add save changes for both score and student info editing
