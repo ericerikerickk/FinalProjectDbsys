@@ -76,7 +76,24 @@ namespace University_Grade_Calculator
 
         private void BtnMarks_Click(object sender, EventArgs e)
         {
-            
+            if (btnMarks.Text.Trim().Equals("Update marks"))
+            {
+                btnMarks.Text = "Save changes";
+                tb_quiz1.Enabled = true;
+                tb_quiz2.Enabled = true;
+                tb_quiz3.Enabled = true;
+                tb_quiz4.Enabled = true;
+            }
+
+            else
+            {
+                btnMarks.Text = "Update marks";
+                tb_quiz1.Enabled = false;
+                tb_quiz2.Enabled = false;
+                tb_quiz3.Enabled = false;
+                tb_quiz4.Enabled = false;
+                updateMarks(tb_quiz1.Text.Trim(), tb_quiz2.Text.Trim(), tb_quiz3.Text.Trim(), tb_quiz4.Text.Trim());
+            }
         }
 
         private void deleteStudent()
@@ -89,11 +106,15 @@ namespace University_Grade_Calculator
 
                     SqlCommand studentCmd = new SqlCommand("DELETE FROM student WHERE id='" + Int32.Parse(tb_studentID.Text.Trim()) + "'", con);
                     SqlCommand attendanceCmd = new SqlCommand("DELETE FROM attendance WHERE student_id = @id",con);
+                    SqlCommand marksCmd = new SqlCommand("DELETE FROM marks WHERE student_id = @id", con);
 
                     attendanceCmd.Parameters.AddWithValue("@id", this.id);
+                    marksCmd.Parameters.AddWithValue("@id", this.id);
 
+                    marksCmd.ExecuteNonQuery();
                     attendanceCmd.ExecuteNonQuery();
                     studentCmd.ExecuteNonQuery();
+                    
 
                     MessageBox.Show("Student deleted!");
                 }
@@ -187,11 +208,6 @@ namespace University_Grade_Calculator
 
         }
 
-        private void retrieveMarks()
-        {
-
-        }
-
         private void updateAttendance(string prelim, string midterm, string finals)
         {
             try
@@ -213,6 +229,97 @@ namespace University_Grade_Calculator
             {
                 MessageBox.Show(err + "We can't add this student to the database.");
             }
+        }
+
+        private void retrieveMarks()
+        {
+            int q1 = 0, q2 = 0, q3 = 0, q4 = 0;
+
+            try
+            {
+                SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+                con.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT * FROM marks WHERE student_id = @id", con))
+                {
+                    command.Parameters.AddWithValue("@id", this.id);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        try
+                        {
+                            while (reader.Read())
+                            {
+                                q1 = reader.GetInt32(2);
+                                q2 = reader.GetInt32(3);
+                                q3 = reader.GetInt32(4);
+                                q4 = reader.GetInt32(5);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show("This student has not score on some quizzes");
+
+                            tb_quiz1.Text = "" + q1;
+                            tb_quiz2.Text = "" + q2;
+                            tb_quiz3.Text = "" + q3;
+                            tb_quiz4.Text = "" + q4;
+
+                            tb_quiz1.Enabled = false;
+                            tb_quiz2.Enabled = false;
+                            tb_quiz3.Enabled = false;
+                            tb_quiz4.Enabled = false;
+                        }
+                    }
+                }
+
+                con.Close();
+
+                tb_quiz1.Text = "" + q1;
+                tb_quiz2.Text = "" + q2;
+                tb_quiz3.Text = "" + q3;
+                tb_quiz4.Text = "" + q4;
+
+                tb_quiz1.Enabled = false;
+                tb_quiz2.Enabled = false;
+                tb_quiz3.Enabled = false;
+                tb_quiz4.Enabled = false;
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err + "Error fetching scores from this student.");
+            }
+
+        }
+
+        private void updateMarks(string q1, string q2, string q3, string q4)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+                {
+                    con.Open();
+
+                    SqlCommand cmd = new SqlCommand("UPDATE marks SET q1 = @score1, q2 = @score2, q3 = @score3, q4 = @score4", con);
+                    cmd.Parameters.AddWithValue("@score1", q1);
+                    cmd.Parameters.AddWithValue("@score2", q2);
+                    cmd.Parameters.AddWithValue("@score3", q3);
+                    cmd.Parameters.AddWithValue("@score4", q4);
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Marks updated!");
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err + "We can't add this student to the database.");
+            }
+        }
+
+        private void BtnCalculate_Click(object sender, EventArgs e)
+        {
+            calculateGrade();
         }
 
         public void calculateGrade()
@@ -280,7 +387,7 @@ namespace University_Grade_Calculator
                 lb_Grade.Visible = true;
 
 
-                lb_displayresult.Text = tb_Name.Text + " with student id " + tb_studentID.Text + " obtained " + percentage.ToString() + "% marks in " + tb_semester.Text + " Semester.";
+                lb_displayresult.Text = tb_Name.Text.ToUpper() + " obtained " + percentage.ToString() + "% marks in " + tb_semester.Text + " Semester.";
                 lb_displayresult.Visible = true;
             }
         }

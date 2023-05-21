@@ -36,7 +36,9 @@ namespace Student_Grading_System
                     recentlyInsertedId = Convert.ToInt32(studentCmd.ExecuteScalar());
                 }
 
+                createMarks(recentlyInsertedId);
                 createAttendance(recentlyInsertedId);
+                
             }
             catch (Exception err)
             {
@@ -60,6 +62,25 @@ namespace Student_Grading_System
                 }
 
                 MessageBox.Show("Student added!");
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err + "We can't add this student to the database.");
+            }
+        }
+
+        private void createMarks(int id)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+                {
+                    con.Open();
+
+                    SqlCommand attendanceCmd = new SqlCommand("INSERT INTO marks(student_id) VALUES(@id)", con);
+                    attendanceCmd.Parameters.AddWithValue("@id", id);
+                    attendanceCmd.ExecuteNonQuery();
+                }
             }
             catch (Exception err)
             {

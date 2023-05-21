@@ -70,6 +70,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.btnAttendance = new System.Windows.Forms.Button();
             this.btnMarks = new System.Windows.Forms.Button();
+            this.btnCalculate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -457,14 +458,14 @@
             // 
             // lb_displayresult
             // 
-            this.lb_displayresult.AutoSize = true;
-            this.lb_displayresult.Font = new System.Drawing.Font("Palatino Linotype", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_displayresult.Location = new System.Drawing.Point(478, 304);
+            this.lb_displayresult.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lb_displayresult.Location = new System.Drawing.Point(478, 289);
             this.lb_displayresult.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_displayresult.Name = "lb_displayresult";
-            this.lb_displayresult.Size = new System.Drawing.Size(43, 16);
+            this.lb_displayresult.Size = new System.Drawing.Size(265, 67);
             this.lb_displayresult.TabIndex = 39;
             this.lb_displayresult.Text = "label16";
+            this.lb_displayresult.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lb_displayresult.Visible = false;
             // 
             // button2
@@ -506,11 +507,25 @@
             this.btnMarks.UseVisualStyleBackColor = false;
             this.btnMarks.Click += new System.EventHandler(this.BtnMarks_Click);
             // 
+            // btnCalculate
+            // 
+            this.btnCalculate.BackColor = System.Drawing.Color.Lime;
+            this.btnCalculate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalculate.Location = new System.Drawing.Point(452, 380);
+            this.btnCalculate.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCalculate.Name = "btnCalculate";
+            this.btnCalculate.Size = new System.Drawing.Size(291, 44);
+            this.btnCalculate.TabIndex = 43;
+            this.btnCalculate.Text = "Calculate grade";
+            this.btnCalculate.UseVisualStyleBackColor = false;
+            this.btnCalculate.Click += new System.EventHandler(this.BtnCalculate_Click);
+            // 
             // HomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 429);
+            this.Controls.Add(this.btnCalculate);
             this.Controls.Add(this.btnMarks);
             this.Controls.Add(this.btnAttendance);
             this.Controls.Add(this.button2);
@@ -609,6 +624,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnAttendance;
         private System.Windows.Forms.Button btnMarks;
+        private System.Windows.Forms.Button btnCalculate;
     }
 }
 
