@@ -78,35 +78,21 @@ namespace Student_Grading_System
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            try
-            {
-                using (SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
-                {
-                    // Retrieve only the available books
-                    string command = "SELECT * FROM student";
-                    con.Open();
-
-                    SqlCommand cmd = new SqlCommand(command, con);
-                    cmd.ExecuteNonQuery();
-
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
-                    {
-                        DataTable books = new DataTable();
-                        adapter.Fill(books);
-                        dataGridView1.DataSource = books;
-                    }
-                }
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err + "We can't load data from our server.");
-            }
+            loadStudents();
 
         }
 
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+                String id = row.Cells["Id"].Value.ToString();
 
+                HomePage details = new HomePage(id);
+                details.ShowDialog();
+                loadStudents();
+            }
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -144,6 +130,33 @@ namespace Student_Grading_System
         {
             editUsername.Visible = false;
             dataGridView1.Visible = true;
+        }
+
+        private void loadStudents()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+                {
+                    // Retrieve only the available books
+                    string command = "SELECT * FROM student";
+                    con.Open();
+
+                    SqlCommand cmd = new SqlCommand(command, con);
+                    cmd.ExecuteNonQuery();
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        DataTable books = new DataTable();
+                        adapter.Fill(books);
+                        dataGridView1.DataSource = books;
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err + "We can't load data from our server.");
+            }
         }
     }
 }

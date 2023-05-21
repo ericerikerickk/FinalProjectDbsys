@@ -146,7 +146,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(145, 44);
             this.button1.TabIndex = 7;
-            this.button1.Text = "Calculate Grade";
+            this.button1.Text = "Edit student";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -466,12 +466,12 @@
             // 
             this.button2.BackColor = System.Drawing.Color.Red;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(308, 99);
+            this.button2.Location = new System.Drawing.Point(260, 99);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(98, 33);
+            this.button2.Size = new System.Drawing.Size(146, 33);
             this.button2.TabIndex = 40;
-            this.button2.Text = "Reset";
+            this.button2.Text = "Delete student";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
