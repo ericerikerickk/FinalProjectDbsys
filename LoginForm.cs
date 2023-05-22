@@ -91,5 +91,10 @@ namespace University_Grade_Calculator
         {
             Environment.Exit(0);
         }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
