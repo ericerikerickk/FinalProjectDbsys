@@ -158,5 +158,33 @@ namespace Student_Grading_System
                 MessageBox.Show(err + "We can't load data from our server.");
             }
         }
+
+        private void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=grading_system;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+                {
+                    // Retrieve only the available books
+                    string command = "SELECT * FROM student WHERE name LIKE @search";
+                    con.Open();
+
+                    SqlCommand cmd = new SqlCommand(command, con);
+                    cmd.Parameters.AddWithValue("@search", "%" + txtSearch.Text.Trim() + "%");
+                    cmd.ExecuteNonQuery();
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        DataTable books = new DataTable();
+                        adapter.Fill(books);
+                        dataGridView1.DataSource = books;
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err + "We can't load data from our server.");
+            }
+        }
     }
 }
